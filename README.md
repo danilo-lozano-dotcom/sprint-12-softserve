@@ -6,7 +6,6 @@ Este es un sistema web básico para la gestión de mascotas, propietarios y cons
 
 - Python 3.8 o superior
 - Django 4.2 o superior
-- (Opcional) djangorestframework, psycopg2-binary, django-cors-headers
 
 ## Instalación
 
@@ -40,8 +39,8 @@ Por defecto, el proyecto utiliza SQLite, por lo que no necesitas configuración 
 Ejecuta los siguientes comandos para crear las tablas en la base de datos:
 
 ```bash
-python gestionar.py makemigrations
-python gestionar.py migrate
+python manage.py makemigrations
+python manage.py migrate
 ```
 
 ## Crear superusuario
@@ -49,7 +48,7 @@ python gestionar.py migrate
 Para acceder al panel de administración de Django, crea un superusuario:
 
 ```bash
-python gestionar.py createsuperuser
+python manage.py createsuperuser
 ```
 
 Sigue las instrucciones en pantalla para definir usuario y contraseña.
@@ -59,7 +58,7 @@ Sigue las instrucciones en pantalla para definir usuario y contraseña.
 Inicia el servidor de desarrollo con:
 
 ```bash
-python gestionar.py runserver
+python manage.py runserver
 ```
 
 Accede a la aplicación en [http://localhost:8000/](http://localhost:8000/)  
@@ -69,6 +68,7 @@ El panel de administración está en [http://localhost:8000/admin/](http://local
 
 - Registrar y listar mascotas, propietarios y consultas veterinarias.
 - Listar los servicios disponibles.
+- Gestión completa desde el panel de administración de Django.
 
 ---
 
