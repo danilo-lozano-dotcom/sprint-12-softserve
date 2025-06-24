@@ -1,0 +1,33 @@
+<!-- filepath: pets/templates/pets/pet_list.html -->
+{% extends 'base.html' %}
+{% block content %}
+<h2>Lista de Mascotas</h2>
+<table border="1">
+    <tr>
+        <th>Nombre</th>
+        <th>Especie</th>
+        <th>Edad</th>
+        <th>Propietario</th>
+    </tr>
+    {% for pet in page_obj %}
+    <tr>
+        <td>{{ pet.name }}</td>
+        <td>{{ pet.species }}</td>
+        <td>{{ pet.age }}</td>
+        <td>{{ pet.owner.name }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<div style="margin-top: 12px;"> 
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+    {% endif %}
+    Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+    {% endif %}
+</div>
+<div style="margin-top: 20px;">
+    <a href="{% url 'pet_register' %}" style="display:inline-block; padding:10px 20px; background:#4CAF50; color:#fff; text-decoration:none; border-radius:8px;">Registrar nueva mascota</a>
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+<!-- filepath: templates/base.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Sistema Veterinario{% endblock %}</title>
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+    <style>
+        body {
+            background: #f8f8f8;
+        }
+        .centered {
+            max-width: 700px;
+            margin: 40px auto 0 auto;
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        table {
+            margin: 0 auto;
+        }
+        header img {
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+        nav {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="centered">
+        <header>
+            <img src="{% static 'img/logo.png' %}" alt="Logo Veterinaria" height="80">
+            {% if request.path != '/' %}
+            <nav>
+                <a href="{% url 'home' %}">Inicio</a> |
+                <a href="{% url 'pet_list' %}">Mascotas</a> |
+                <a href="{% url 'owner_list' %}">Propietarios</a> |
+                <a href="{% url 'appointment_list' %}">Consultas</a> |
+                <a href="{% url 'services' %}">Servicios</a>
+            </nav>
+            {% endif %}
+        </header>
+        {% if messages or form.errors %}
+            {% for message in messages %}
+                <div style="margin-bottom:15px; padding:12px; border-radius:8px; color:#fff; background: {% if message.tags == 'success' %}#4CAF50{% else %}#F44336{% endif %}; font-weight:bold;">
+                    {{ message }}
+                    {% if message.tags == 'error' and form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <div style="margin-top:8px; font-weight:normal;">{{ error }}</div>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <div style="margin-top:8px; font-weight:normal;">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+            {% if not messages and form.errors %}
+                <div style="margin-bottom:15px; padding:12px; border-radius:8px; color:#fff; background:#F44336; font-weight:bold;">
+                    Por favor corrige los errores en el formulario.
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div style="margin-top:8px; font-weight:normal;">{{ error }}</div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <div style="margin-top:8px; font-weight:normal;">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endif %}
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

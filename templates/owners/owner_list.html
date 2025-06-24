@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Lista de Propietarios</h2>
+<table border="1">
+    <tr>
+        <th>Nombre</th>
+        <th>Teléfono</th>
+        <th>Email</th>
+    </tr>
+    {% for owner in page_obj %}
+    <tr>
+        <td>{{ owner.name }}</td>
+        <td>{{ owner.phone }}</td>
+        <td>{{ owner.email }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<div style="margin-top: 12px;">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+    {% endif %}
+    Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+    {% endif %}
+</div>
+<div style="margin-top: 20px;">
+    <a href="{% url 'owner_create' %}" style="display:inline-block; padding:10px 20px; background:#2196F3; color:#fff; text-decoration:none; border-radius:8px;">Registrar nuevo propietario</a>
+</div>
+{% endblock %}

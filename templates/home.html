@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>¡Bienvenid@ al Sistema de Gestión Veterinaria!</h1>
+<div style="margin-top: 30px;">
+    <a href="{% url 'pet_list' %}" style="display:inline-block; margin:10px; padding:15px 30px; background:#4CAF50; color:#fff; text-decoration:none; border-radius:8px;">Mascotas</a>
+    <a href="{% url 'owner_list' %}" style="display:inline-block; margin:10px; padding:15px 30px; background:#2196F3; color:#fff; text-decoration:none; border-radius:8px;">Propietarios</a>
+    <a href="{% url 'appointment_list' %}" style="display:inline-block; margin:10px; padding:15px 30px; background:#FF9800; color:#fff; text-decoration:none; border-radius:8px;">Consultas</a>
+    <a href="{% url 'services' %}" style="display:inline-block; margin:10px; padding:15px 30px; background:#9C27B0; color:#fff; text-decoration:none; border-radius:8px;">Servicios</a>
+</div>
+{% endblock %}
